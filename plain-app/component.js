@@ -3,11 +3,8 @@
  */
 
 class StoryBox extends React.Component {
-
     render() {
-
         const topicsList = ['HTML', 'JS', 'CSS'];
-
 
         const now = new Date();
         return (

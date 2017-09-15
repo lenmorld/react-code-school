@@ -48,3 +48,15 @@ babel - ES2015 and JSX
 
 JSX can be mixed with JS
 to insert JS code into JSX, {}
+
+
+2 =================
+building a commenting app
+2 components
+- CommentBox
+- Comment
+
+good idea to layout component in HTML first before
+putting it in React
+
+React components receive arguments through "Props"
