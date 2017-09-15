@@ -132,3 +132,27 @@ https://facebook.github.io/react/docs/events.html
 
 e.g.
 onSubmit - may differ within browsers
+
+5==============
+talking to remote servers
+using lifecycle methods to load comments
+
+use jQuery for AJAX requests
+
+cant call fetchCOmments from render since fetchComments() calls setState,
+which calls render -> INFINITE LOOP
+
+use React Lifecycle Methods
+- get called while component is rendered for the first time or about to be
+removed from the DOM
+
+1. constructor()
+2. componentWillMount()     -> before render
+3. render()
+4. componentDidMount()      -> after render
+5. componentWillUnmount()
+
+"mounting" means rendering for the first time
+"unmounting" getting removed from DOM
+
+getting periodic updates from server - "polling"
