@@ -83,3 +83,49 @@ access by using this.state
 
 cause state change:
 - button/link click, AJAX call
+
+4=== synthetic events to capture user actions ===
+
+new component CommentForm
+child of CommentBox, above the Comments list
+
+"refs"
+- assign form (input element) values to properties on the component object
+    so we can access these values
+
+
+<input placeholder="Name:"
+    ref={(input) => this._author = input }/>
+<textarea placeholder="Comment:"
+    ref={(textarea) => this._body = textarea}></textarea>
+
+equivalent to:
+
+ref={
+    function(input) {
+        this._author = input;
+    }.bind(this)
+}
+
+
+React runs "ref" callbacks on render
+
+Parent CommentBox passes function to CommentForm
+so that CommentForm can propagate data for new comments to CommentBox
+
+-> functions in JS are "first-class" citizens, so we can pass them as
+props to other components <-
+
+concat() vs push()
+
+// array references help React stay fast instead of mutating object
+this.setState({ comments: this.state.comments.concat([comment]) });
+
+
+Event handling in React:
+to ensure events have consistent properties across browsers,
+React wraps browser's native events into
+"synthetic events" as one consolidated browser behavior API
+
+e.g.
+onSubmit - may differ within browsers
