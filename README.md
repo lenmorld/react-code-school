@@ -60,3 +60,4 @@ good idea to layout component in HTML first before
 putting it in React
 
 React components receive arguments through "Props"
+

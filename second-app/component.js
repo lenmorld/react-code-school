@@ -22,20 +22,57 @@ class Comment extends React.Component {
 
 class CommentBox extends React.Component {
     render() {
+        const comments = this._getComments();
         return(
-            <div class="comment-box">  {/* root CommentBox component */}
+            <div className="comment-box">  {/* root CommentBox component */}
                 <h3>Comments</h3>
-                <h4 className="comment-count">2 comments</h4>
+                <h4 className="comment-count">{this._getCommentsTitle(comments.length)}</h4>
                 <div className="comment-list">
                     {/* Props */}
-                    <Comment
-                        author="Lenny the Lobster" body="under the sea!"/>
-                    <Comment
-                        author="Lenny the fisher" body="lets go fishing!"/>
+                    {/*<Comment*/}
+                        {/*author="Lenny the Lobster" body="under the sea!"/>*/}
+                    {/*<Comment*/}
+                        {/*author="Lenny the fisher" body="lets go fishing!"/>*/}
+
+                    {/*JSX can render array of JSX elements*/}
+                    {comments}
                 </div>
             </div>
         )
     }
+
+    // underscore for self-written methods
+    _getComments() {
+
+        const commentList = [
+            {id: 1, author: 'Lenny Lobster', body: 'Great picture!' },
+            {id: 2, author: 'Lenny Fisher', body: 'Excellent stuff'}
+        ];
+
+        return commentList.map((comment) => {
+            return (
+                <Comment
+                    author={comment.author} body={comment.body}
+                    key={comment.id}
+                />);
+            // pass key for unique identification
+        });
+    }
+
+    _getCommentsTitle(commentCount) {
+        if (commentCount == 0) {
+            return 'No comments yet';
+        }
+        else if (commentCount == 1) {
+            return '1 comment';
+        }
+        else {
+            return `${commentCount} comments`;      // <- `` for extrapolation
+        }
+
+    }
+
+
 }
 
 ReactDOM.render(
