@@ -61,3 +61,25 @@ putting it in React
 
 React components receive arguments through "Props"
 
+3==================
+state changes
+
+SHOW/HIDE comments
+
+manipulating DOM
+1. Direct DOM manipulation - jQuery, Backbone, etc
+2. Indirect DOM manipulation - React
+
+jQuery - event listeners
+React - modify component state object
+        events -> update state -> DOM updates
+
+state - JS object that lives inside each component
+        access via this.state
+
+init state in component constructor()
+and change by calling setState()
+access by using this.state
+
+cause state change:
+- button/link click, AJAX call
