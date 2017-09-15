@@ -127,5 +127,8 @@ to ensure events have consistent properties across browsers,
 React wraps browser's native events into
 "synthetic events" as one consolidated browser behavior API
 
+list of React synthetic events
+https://facebook.github.io/react/docs/events.html
+
 e.g.
 onSubmit - may differ within browsers
