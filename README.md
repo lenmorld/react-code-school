@@ -156,3 +156,37 @@ removed from the DOM
 "unmounting" getting removed from DOM
 
 getting periodic updates from server - "polling"
+
+
+== DELETING COMMENTS
+
+ES2015 string template syntax
+
+url:  `/api/comments/${comment.id}`
+
+Optimistic Update - now wait for API request to be finished before updating
+the component's state
+-> give our user immediate visual feedback "optimistic update"
+
+spread operator for array
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator#A_better_way_to_concatenate_arrays
+
+e.g.
+var arr = [1, 2, 3];
+var arr2 = [...arr]; // like arr.slice()
+arr2.push(4);
+
+// arr2 becomes [1, 2, 3, 4]
+// arr remains unaffected
+
+
+One-way control flow
+- higher level components down to child components
+  forcing changes to happen reactively
+
+  e.g. CommentBox pass _deleteComment, _addComment to Comment
+        CommentBox also passes author and body as props to each comment
+
+        Comment pass data back to CommentBox through callback
+        and also passes props
+

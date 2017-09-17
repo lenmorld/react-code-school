@@ -11,12 +11,21 @@ class Comment extends React.Component {
                     {this.props.body}
                 </p>
                 <div className="comment-footer">
-                    <a href="#" className="comment-footer-delete">
+                    <a href="#"
+                       className="comment-footer-delete"
+                        onClick={this._handleDelete.bind(this)}>
                         Delete comment
                     </a>
                 </div>
             </div>
         );
+    }
+
+    _handleDelete(event) {
+        event.preventDefault();
+        if (confirm('Are you sure?')) {
+            this.props.onDelete(this.props.comment);
+        }
     }
 }
 
@@ -99,8 +108,21 @@ class CommentBox extends React.Component {
                 <Comment
                     author={comment.author}
                     body={comment.body}
-                    key={comment.id} />
+                    key={comment.id}
+                    onDelete={this._deleteComment.bind(this)}
+                />
             );
+        });
+    }
+
+    _fetchComments() {
+        jQuery.ajax({
+            method: 'GET',
+            url: '/api/comments',
+            // arrow function preserve 'this' binding to our class inside callback
+            success: (comments) => {
+                this.setState({ comments })
+            }
         });
     }
 
@@ -153,15 +175,41 @@ class CommentBox extends React.Component {
         clearInterval(this._timer);
     }
 
-    _fetchComments() {
+
+
+    _deleteComment(comment) {
         jQuery.ajax({
-           method: 'GET',
-            url: '/api/comments',
-            // arrow function preserve 'this' binding to our class inside callback
-            success: (comments) => {
-               this.setState({ comments })
-            }
+            method: 'DELETE',
+            url:  `/api/comments/${comment.id}`
         });
+
+        // optimistic update
+        const comments = [...this.state.comments];      // spread operator to clone array
+        const commentIndex = comments.indexOf(comment);
+        comments.splice(commentIndex, 1);               // delete
+
+        this.setState({
+            comments
+        });
+
+    }
+
+    _addComment(author, body) {
+        // sample
+        // const comment = { id: this.state.comments.length + 1, author, body };
+        // this.setState( {
+        //     comments: this.state.comments.concat([comment])
+        // })
+
+        // post to server
+        const comment = { author, body };
+
+        jQuery.post('/api/comments', { comment })
+            .success(newComment => {
+              this.setState({
+                  comments: this.state.comments.concat([newComment])
+              });
+            });
     }
 
 }
