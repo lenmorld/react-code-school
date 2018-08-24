@@ -1,4 +1,7 @@
-"# react tut"
+# React experiments
+## following Code School - Powering Up With React
+
+last update: August 2017
 
 React was built to solve one problem:
 building large applications with data that changes over time
@@ -189,4 +192,3 @@ One-way control flow
 
         Comment pass data back to CommentBox through callback
         and also passes props
-
